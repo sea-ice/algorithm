@@ -5,58 +5,64 @@
 
 
 function getInput(input) {
-    let lines = input.split('\n')
-    return lines.reduce(
-        (res, next, i) => res.concat(i % 2 === 1 ? next.split(' ') : next), [])
+  let lines = input.split('\n')
+  return lines.reduce(
+    (res, next, i) => res.concat(i % 2 === 1 ? next.split(' ') : next), [])
 }
 
 function maxKey(obj) {
-    let keys = Object.keys(obj).filter(
-        key => key !== 'count'
-    ).map(key => Number(key))
-    if (keys.length > 0) {
-        let max = Math.max(...keys)
-        obj[max].count--
-        returm max
-    } else {
-        return null
-    }
+  let keys = Object.keys(obj).filter(
+    key => key !== 'count'
+  ).map(key => Number(key))
+  if (keys.length > 0) {
+    let max = Math.max(...keys)
+    obj[max].count--
+    return max
+  } else {
+    return null
+  }
 }
 
 function destruct(obj, sorted, i) {
-    sorted = sorted || []
-    let keys = Object.keys(obj)
-    let i = sorted.length
-    let keyPath = []
-    let max = maxKey(obj)
-    if (max !== null) {
-        keyPath.push(max)
-        let next = obj
-    } else {
-        return sorted.join('')
-    }
+  sorted = sorted || []
+  let keys = Object.keys(obj)
+  let i = sorted.length
+  let keyPath = []
+  let max = maxKey(obj)
+  if (max !== null) {
+    keyPath.push(max)
+    let next = obj
+  } else {
+    return sorted.join('')
+  }
 }
 
 function combine(numbers) {
-    let dict = {count: 0}
-    for (let i = 0, len = numbers.length; i < len; i++) {
-        let numSplit = numbers[i].split('')
-        dict.count++
-        numSplit.reduce((prev, cur) => (
-            prev[cur] ? Object.assign(
-                prev[cur], {count: prev[cur].count + 1}
-            ) : (prev[cur] = {count: 1})), dict)
-    }
-    return destruct(dict)
+  let dict = {
+    count: 0
+  }
+  for (let i = 0, len = numbers.length; i < len; i++) {
+    let numSplit = numbers[i].split('')
+    dict.count++
+      numSplit.reduce((prev, cur) => (
+        prev[cur] ? Object.assign(
+          prev[cur], {
+            count: prev[cur].count + 1
+          }
+        ) : (prev[cur] = {
+          count: 1
+        })), dict)
+  }
+  return destruct(dict)
 }
 
 function main(input) {
-    input = getInput(input)
-    let result = []
-    while (input.length) {
-        let n = input.shift()
-        let numbers = input.splice(0, Number(n))
-        result.push(combine(numbers))
-    }
-    return result.join('\n')
+  input = getInput(input)
+  let result = []
+  while (input.length) {
+    let n = input.shift()
+    let numbers = input.splice(0, Number(n))
+    result.push(combine(numbers))
+  }
+  return result.join('\n')
 }

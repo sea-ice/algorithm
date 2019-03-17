@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/sea-ice/algorithm/issues"
   },
-  "homepage": "https://github.com/sea-ice/algorithm#readme"
+  "homepage": "https://github.com/sea-ice/algorithm#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
