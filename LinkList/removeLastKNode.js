@@ -1,3 +1,6 @@
+/**
+ * 移除单向链表和双向链表中倒数第k个节点
+ */
 let MakeLinkList = require('./MakeLinkList')
 
 function removeLastKNodeInOneWayList(array, k) {
